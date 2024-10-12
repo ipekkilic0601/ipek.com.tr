@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" href="felix.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yapay Zeka Sohbet Penceresi</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="logo" onclick="openChat()">
+    <img src="logo.png" alt="Logo">
+  </div>
+  <div class="chat-popup" id="chat-popup">
+    <div class="chat-container">
+      <div class="header">
+        <span class="close" onclick="closeChat()">&times;</span>
+        <h1>Yapay Zeka Sohbet</h1>
+      </div>
+      <div class="chat-area" id="chat-area">
+        <div class="bot-message">
+          <p>Yapay Zeka: Nasıl yardımcı olabilirim?</p>
+          <div class="options">
+            <button class="option-button" onclick="showTechnicalIssueOptions()">Web sitede teknik bir arıza çıktı</button>
+            <button class="option-button" onclick="showProductIssueOptions()">Ürünler hakkında problemim var</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+<script>
+function openChat() {
+  document.getElementById("chat-popup").style.display = "block";
+}
+
+function closeChat() {
+  document.getElementById("chat-popup").style.display = "none";
+}
+
+function showTechnicalIssueOptions() {
+  var chatArea = document.getElementById("chat-area");
+  chatArea.innerHTML += '<div class="user-message"><p>Web sitede teknik bir arıza çıktı</p></div>';
+  chatArea.innerHTML += '<div class="bot-message"><p>Yapay Zeka: Hangi türde bir teknik arıza ile karşılaştınız?</p></div>';
+  chatArea.innerHTML += '<div class="options">';
+  chatArea.innerHTML += '<button class="option-button" onclick="showTechnicalSolution()">Siteye ulaşamıyorum</button>';
+  chatArea.innerHTML += '<button class="option-button" onclick="showTechnicalSolution()">Hata veriyor</button>';
+  chatArea.innerHTML += '<button class="option-button" onclick="showTechnicalSolution()">Diğer</button>';
+  chatArea.innerHTML += '</div>';
+}
+
+function showTechnicalSolution() {
+  var chatArea = document.getElementById("chat-area");
+  chatArea.innerHTML += '<div class="bot-message"><p>Yapay Zeka: Teknik arıza çözümü burada olacak</p></div>';
+}
+
+function showProductIssueOptions() {
+  var chatArea = document.getElementById("chat-area");
+  chatArea.innerHTML += '<div class="user-message"><p>Ürünler hakkında problemim var</p></div>';
+  chatArea.innerHTML += '<div class="bot-message"><p>Yapay Zeka: Ürünlerle ilgili ne tür bir problem yaşadınız?</p></div>';
+  chatArea.innerHTML += '<div class="options">';
+  chatArea.innerHTML += '<button class="option-button" onclick="showProductSolution()">Ürünüm ne zaman elime ulaşır?</button>';
+  chatArea.innerHTML += '<button class="option-button" onclick="showProductSolution()">Ürünüm bozuk/kırık/yırtık geldi</button>';
+  chatArea.innerHTML += '<button class="option-button" onclick="showProductSolution()">Diğer</button>';
+  chatArea.innerHTML += '</div>';
+}
+
+function showProductSolution() {
+  var chatArea = document.getElementById("chat-area");
+  chatArea.innerHTML += '<div class="bot-message"><p>Yapay Zeka: Ürün sorununun çözümü burada olacak</p></div>';
+}
+
+</script>
+</html>

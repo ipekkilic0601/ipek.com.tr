@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="signup.css">
+    <title>İpek Swift</title>
+    <style>
+        .form-structor {
+            width: 300px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .input-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .suggestion-box {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            display: none;
+            z-index: 10;
+            max-height: 150px;
+            overflow-y: auto;
+            font-size: 14px;
+        }
+
+        .suggestion-box span {
+            display: block;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .suggestion-box span:hover {
+            background: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-structor">
+        <div class="signup">
+            <h2 class="form-title" id="signup"><span>or</span>Sign up</h2>
+            <div class="form-holder">
+                <div class="input-container">
+                    <input type="text" class="input" id="name" placeholder="Name" />
+                    <div id="suggestion-box" class="suggestion-box"></div>
+                </div>
+                <input type="email" class="input" id="email" placeholder="Email" />
+                <input type="password" class="input" id="password" placeholder="Password" />
+                <div id="password-help" style="color: red; font-size: 12px; display: none;">Password must be at least 8 characters long and contain a mix of letters and numbers.</div>
+            </div>
+            <a href="ps.html"><button class="submit-btn" id="submit-btn">Sign up</button></a>
+            <div id="form-error" style="color: red; font-size: 12px; display: none;">Please fill in all fields correctly.</div>
+            <div id="success-message" style="color: green; font-size: 12px; display: none;">Registration successful!</div>
+        </div>
+    </div>
+
+    <script>
+        const takenUsernames = ['ipek', 'cihan', 'elif', 'elifnaz', 'buse', 'zeren', 'rana', 'merve'];
+        const suggestions = {
+            'ipek': ['ipekplus', 'ipekgluk', 'ipekuser'],
+            'cihan': ['cihan2024', 'cihantastic', 'cihantastic22'],
+            'elif': ['elifxoxo', 'elifmagic', 'elifstar'],
+            'elifnaz': ['elifnaz2024', 'elifnazeasy', 'elifnazmax'],
+            'buse': ['busequeen', 'buseforyou', 'busehero'],
+            'zeren': ['zeren2024', 'zerenstar', 'zerenmagic'],
+            'rana': ['rana2024', 'ranamagic', 'ranastar'],
+            'merve': ['mervequeen', 'merve2024', 'mervehero']
+        };
+
+        function getSuggestions(username) {
+            for (let key in suggestions) {
+                if (username.startsWith(key)) {
+                    return suggestions[key];
+                }
+            }
+            return [];
+        }
+
+        document.getElementById('name').addEventListener('input', function() {
+            const username = this.value.trim().toLowerCase();
+            const suggestionBox = document.getElementById('suggestion-box');
+
+            if (takenUsernames.includes(username)) {
+                const suggestedUsernames = getSuggestions(username);
+                if (suggestedUsernames.length > 0) {
+                    suggestionBox.innerHTML = suggestedUsernames.map(name => `<span>${name}</span>`).join('');
+                    suggestionBox.style.display = 'block';
+                } else {
+                    suggestionBox.style.display = 'none';
+                }
+            } else {
+                suggestionBox.style.display = 'none';
+            }
+        });
+
+        document.getElementById('suggestion-box').addEventListener('click', function(e) {
+            if (e.target.tagName === 'SPAN') {
+                document.getElementById('name').value = e.target.textContent;
+                this.style.display = 'none';
+            }
+        });
+
+        document.getElementById('submit-btn').addEventListener('click', function(event) {
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const passwordHelp = document.getElementById('password-help');
+            const formError = document.getElementById('form-error');
+            const successMessage = document.getElementById('success-message');
+            
+            let isValid = true;
+
+            // Reset messages
+            passwordHelp.style.display = 'none';
+            formError.style.display = 'none';
+            successMessage.style.display = 'none';
+
+            // Check if fields are empty
+            if (!name || !email || !password) {
+                formError.textContent = 'Please fill in all fields.';
+                formError.style.display = 'block';
+                isValid = false;
+            }
+
+            // Validate password strength
+            const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+            if (password && !passwordRegex.test(password)) {
+                passwordHelp.style.display = 'block';
+                isValid = false;
+            }
+
+            // Display success message if valid
+            if (isValid) {
+                successMessage.style.display = 'block';
+
+                // Create a form and submit it via POST to the PHP script
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = 'signup.php';
+
+                const inputName = document.createElement('input');
+                inputName.type = 'hidden';
+                inputName.name = 'name';
+                inputName.value = name;
+                form.appendChild(inputName);
+
+                const inputEmail = document.createElement('input');
+                inputEmail.type = 'hidden';
+                inputEmail.name = 'email';
+                inputEmail.value = email;
+                form.appendChild(inputEmail);
+
+                const inputPassword = document.createElement('input');
+                inputPassword.type = 'hidden';
+                inputPassword.name = 'password';
+                inputPassword.value = password;
+                form.appendChild(inputPassword);
+
+                document.body.appendChild(form);
+                form.submit();
+            }
+
+            // Prevent form submission if invalid
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+    </script>
+
+</body>
+</html>
