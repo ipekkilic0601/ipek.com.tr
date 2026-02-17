@@ -1,0 +1,47 @@
+<html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="coraline.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coraline Dialogue</title>
+
+</head>
+<body>
+  <div class="container">
+    <div class="character">
+      <img src="https://imgur.com/BO3vb6T.png" alt="Coraline">
+    </div>
+    <div class="dialogue">
+      <div class="name-box">Coraline</div>
+      <div class="chat-bubble">
+        <span class="chat-text"></span><span class="cursor"></span>
+      </div>
+      <div class="proceed">
+        <a href="https://codepen.io/Anaya-Francheska-Sibug/full/XJmzyVB" target="_blank"><button>Continue</button></a>
+      </div>
+    </div>
+  </div>
+</body>
+<script>    document.addEventListener("DOMContentLoaded", () => {
+    const chatText = document.querySelector(".chat-text");
+    const cursor = document.querySelector(".cursor");
+    const proceed = document.querySelector(".proceed");
+    let text = "I'm stuck here in the Other World! Please help me escape by looking for the three keys to unlock the door. But remember: Trust the signs, not the voices. The lost souls of the children will help you. Continue when you're ready.";
+    let i = 0;
+    function typeWriter() {
+      if (i < text.length) {
+        chatText.textContent += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 40);
+      } else {
+        cursor.style.display = "none";
+        setTimeout(() => {
+          proceed.classList.add("show");
+        }, 500);
+      }
+    }
+    typeWriter();
+  });</script>
+</html>
