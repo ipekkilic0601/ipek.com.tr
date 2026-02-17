@@ -34,9 +34,8 @@
               <header>exemplary collaboration</header>
               <ul class="mega-links">
                 <li><a href="zeren/zerenim/index.html">z e r e n</a></li>
-                <li><a href="">sushiria</a></li>
+                <li><a href="sushi/index1.html">sushiria</a></li>
                 <li><a href="https://aiset.com.tr/">aiset</a></li>
-                <li><a href="">rana</a></li>
               </ul>
       
             </div>
@@ -48,15 +47,40 @@
         <a href="game.html" class="desktop-item">Games</a>
         <input type="checkbox" id="showDrop">
         <label for="showDrop" class="mobile-item">Games</label>
-        <ul class="drop-menu">
-          <li><a href="indexgamefarm.html">Farm Game </a></li>
-          <li><a href="unicorn.html">Unicorn Game 🦄</a></li>
-          <li><a href="bee.html">Bee Game 🐝</a></li>
-          <li><a href="adam.html">Hangman</a></li>
-          <li><a href="stickhero.html">Stick Hero</a></li>
-          <li><a href="flappybird.html">Flappy Bird</a></li>
-          <li><a href="doom.html">Doom</a></li>
-        </ul>
+        <div class="games-dropdown">
+
+  <a href="indexgamefarm.html" class="game-card">
+    <img src="https://i.pinimg.com/736x/71/65/8f/71658fceadf3e8ed0d64a48500e27d73.jpg">
+    <span>Farm Game</span>
+  </a>
+
+  <a href="unicorn.html" class="game-card">
+    <img src="https://i.pinimg.com/736x/fc/c7/57/fcc757fc29e35358baad36eadb8c2951.jpg">
+    <span>Unicorn Game 🦄</span>
+  </a>
+
+  <a href="bee.html" class="game-card">
+    <img src="https://i.pinimg.com/736x/78/9d/8d/789d8d47def7f7f8b2b714e9ca472091.jpg">
+    <span>Bee Game 🐝</span>
+  </a>
+
+  <a href="adam.html" class="game-card">
+    <img src="https://i.pinimg.com/736x/3e/c8/49/3ec849687e411a96faf563c2ca67e8e6.jpg">
+    <span>Hangman</span>
+  </a>
+
+  <a href="stickhero.html" class="game-card">
+    <img src="https://i.pinimg.com/736x/f1/be/75/f1be75fb12a118a54e1b65207f0493d0.jpg">
+    <span>Stick Hero</span>
+  </a>
+
+  <a href="flappybird.html" class="game-card">
+    <img src="https://i.pinimg.com/1200x/8e/57/67/8e5767ca8bf4272ccb9ab05ea712951b.jpg">
+    <span>Flappy Bird</span>
+  </a>
+
+</div>
+
       </li>
       <li>
         <a href="ürünler.html" class="desktop-item">Products</a>
@@ -117,7 +141,10 @@
   </div>
 </nav>
 
- 
+ <audio id="bg-music" loop>
+  <source src="Taylor Swift - tolerate it (Instrumental).mp3" type="audio/mp3">
+</audio>
+
 
 
     <section class="intro">
@@ -190,7 +217,7 @@
   
   function showTechnicalSolution() {
     var chatArea = document.getElementById("chat-area");
-    chatArea.innerHTML += '<div class="bot-message"><p>Yapay Zeka: Teknik arıza çözümü burada olacak</p></div>';
+    chatArea.innerHTML += '<div class="bot-message"><p>Banane</p></div>';
   }
   
   function showProductIssueOptions() {
@@ -206,9 +233,12 @@
   
   function showProductSolution() {
     var chatArea = document.getElementById("chat-area");
-    chatArea.innerHTML += '<div class="bot-message"><p>Yapay Zeka: Ürün sorununun çözümü burada olacak</p></div>';
+    chatArea.innerHTML += '<div class="bot-message"><p>Senin sorunun banane</p></div>';
   }
-  
+  window.addEventListener("click", () => {
+  document.getElementById("tay").play();
+}, { once: true });
+
   </script>
 
 </html>
